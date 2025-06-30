@@ -40,13 +40,12 @@ export function EmojiList() {
       <div
         className={cx(styles.navigationContainer)}
         style={{
+          // Hide scrollbar
           msOverflowStyle: 'none',
-          maxHeight: `calc(${height} - var(--epr-emoji-variation-picker-height) - var(--epr-horizontal-padding) * 2)`,
           scrollbarWidth: 'none',
+          maxHeight: `calc(${height} - var(--epr-emoji-variation-picker-height) - var(--epr-horizontal-padding) * 2 - var(--epr-preview-height))`,
         }}
       >
-        <CategoryNavigation />
-        <CategoryNavigation />
         <CategoryNavigation />
       </div>
       <div className={cx(styles.emojiListContainer)}>

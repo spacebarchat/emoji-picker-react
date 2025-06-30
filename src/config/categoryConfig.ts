@@ -25,7 +25,7 @@ export type CustomCategoryConfig = {
   name: string;
 };
 
-export const configByCategory: Record<Categories, CategoryConfig> = {
+const configByCategory: Record<Categories, CategoryConfig> = {
   [Categories.SUGGESTED]: {
     category: Categories.SUGGESTED,
     name: 'Frequently Used',
