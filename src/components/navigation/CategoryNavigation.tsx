@@ -32,7 +32,7 @@ export function CategoryNavigation() {
       id="epr-category-nav-id"
       ref={CategoryNavigationRef}
     >
-      {categoriesConfig.map(categoryConfig => {
+      {categoriesConfig.map((categoryConfig) => {
         const category = categoryFromCategoryConfig(categoryConfig);
         const isActiveCategory = category === activeCategory;
 
@@ -64,22 +64,22 @@ const styles = stylesheet.create({
   nav: {
     '.': 'epr-category-nav',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-around',
-    padding: 'var(--epr-header-padding)'
+    padding: 'var(--epr-header-padding)',
   },
   '.epr-search-active': {
     nav: {
       opacity: '0.3',
       cursor: 'default',
-      pointerEvents: 'none'
-    }
+      pointerEvents: 'none',
+    },
   },
   '.epr-main:has(input:not(:placeholder-shown))': {
     nav: {
       opacity: '0.3',
       cursor: 'default',
-      pointerEvents: 'none'
-    }
-  }
+      pointerEvents: 'none',
+    },
+  },
 });
