@@ -6,13 +6,13 @@ import EmojiPicker, {
   EmojiStyle,
   Props,
   SkinTones,
-  Theme
+  Theme,
 } from '../src';
-import { Categories } from '../src/config/categoryConfig';
+import { baseCategoriesConfig, Categories } from '../src/config/categoryConfig';
 import {
   EmojiClickData,
   SkinTonePickerLocation,
-  SuggestionMode
+  SuggestionMode,
 } from '../src/types/exposedTypes';
 
 const meta: Meta = {
@@ -21,20 +21,60 @@ const meta: Meta = {
   argTypes: {
     children: {
       control: {
-        type: 'text'
-      }
-    }
+        type: 'text',
+      },
+    },
   },
   parameters: {
-    controls: { expanded: true }
-  }
+    controls: { expanded: true },
+  },
 };
 
 export default meta;
 
 export const Native = (args: Props) => (
-  <Template {...args} emojiStyle={EmojiStyle.NATIVE} />
+  <Template {...args} emojiStyle={EmojiStyle.TWITTER} />
 );
+
+const customEmojisWithGuilds = [
+  {
+    names: ['spacebar'],
+    imgUrl: 'https://avatars.githubusercontent.com/u/75180178?s=200&v=4',
+    id: 'spacebar',
+    categoryId: '1382303851090',
+  },
+  {
+    names: ['faze clan'],
+    imgUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/FaZe-Logo-2024-All.png/960px-FaZe-Logo-2024-All.png?20241121035659',
+    id: 'faze_clan',
+    categoryId: '1386575262181',
+  },
+];
+
+export const DiscordGuildCategories = (args: Props) => (
+  <Template
+    {...args}
+    emojiStyle={EmojiStyle.NATIVE}
+    customEmojis={customEmojisWithGuilds}
+    theme={Theme.DARK}
+    categories={[
+      {
+        name: 'Spacebar',
+        imageUrl: 'https://avatars.githubusercontent.com/u/75180178?s=200&v=4',
+        category: 'custom_1382303851090',
+      },
+      {
+        name: 'FaZe',
+        imageUrl:
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/FaZe-Logo-2024-All.png/960px-FaZe-Logo-2024-All.png?20241121035659',
+        category: 'custom_1386575262181',
+      },
+      ...baseCategoriesConfig(),
+    ]}
+  />
+);
+
 export const Default = (args: Props) => <Template {...args} />;
 export const Dark = (args: Props) => (
   <TemplateDark {...args} theme={Theme.DARK} />
@@ -132,7 +172,7 @@ export const LazyLoaded = (args: Props) => (
 export const SkinToneChange = (args: Props) => (
   <Template
     {...args}
-    onSkinToneChange={skinTone => {
+    onSkinToneChange={(skinTone) => {
       console.log('New skin tone set:', skinTone);
     }}
   />
@@ -142,7 +182,7 @@ export const ReactionsMenu = (args: Props) => (
   <Template
     {...args}
     reactionsDefaultOpen={true}
-    onReactionClick={data => {
+    onReactionClick={(data) => {
       console.log('Clicked reaction!', data);
     }}
   />
@@ -153,7 +193,7 @@ export const ReactionsMenuNoExpand = (args: Props) => (
     {...args}
     reactionsDefaultOpen={true}
     allowExpandReactions={false}
-    onReactionClick={data => {
+    onReactionClick={(data) => {
       console.log('Clicked reaction!', data);
     }}
   />
@@ -167,7 +207,7 @@ export const ReactionsMenuWithStyles = (args: Props) => (
       width: '300px',
       position: 'absolute',
       top: '150px',
-      boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)'
+      boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
     }}
   />
 );
@@ -181,7 +221,7 @@ export const CustomReactions = (args: Props) => (
       '1f4aa',
       '1f4ab',
       // angry
-      '1f620'
+      '1f620',
     ]}
   />
 );
@@ -224,7 +264,7 @@ export const CustomPreviewConfig = (args: Props) => (
     {...args}
     previewConfig={{
       defaultEmoji: '1fae5',
-      defaultCaption: 'What have we here?'
+      defaultCaption: 'What have we here?',
     }}
   />
 );
@@ -234,20 +274,20 @@ export const CustomCategoryConfig = (args: Props) => (
     categories={[
       {
         name: 'Fun and Games',
-        category: Categories.ACTIVITIES
+        category: Categories.ACTIVITIES,
       },
       {
         name: 'Smileys & Emotion',
-        category: Categories.SMILEYS_PEOPLE
+        category: Categories.SMILEYS_PEOPLE,
       },
       {
         name: 'Flags',
-        category: Categories.FLAGS
+        category: Categories.FLAGS,
       },
       {
         name: 'Yum Yum',
-        category: Categories.FOOD_DRINK
-      }
+        category: Categories.FOOD_DRINK,
+      },
     ]}
   />
 );
@@ -266,7 +306,7 @@ export const StandaloneEmojiNative = () => {
         size={60}
       />
       <EmojiPicker
-        onEmojiClick={clickedEmoji => {
+        onEmojiClick={(clickedEmoji) => {
           console.log(clickedEmoji);
           setCurrentEmoji(clickedEmoji);
         }}
@@ -280,7 +320,7 @@ export const CustomUnifiedEmojiImage = () => {
   return (
     <>
       <Emoji unified={unified} size={35} />
-      <input onChange={e => setUnified(e.target.value)} value={unified} />
+      <input onChange={(e) => setUnified(e.target.value)} value={unified} />
     </>
   );
 };
@@ -302,8 +342,8 @@ function TemplateDark(args) {
         ...(hasBg && {
           backgroundImage:
             'url(https://images.unsplash.com/photo-1705359461450-f9ac9d4567c7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
-          backgroundSize: 'cover'
-        })
+          backgroundSize: 'cover',
+        }),
       }}
     >
       <button onClick={() => setOpen(!open)} style={{ margin: '20px' }}>
@@ -339,14 +379,14 @@ function Template(args) {
           ...(hasBg && {
             backgroundImage:
               'url(https://plus.unsplash.com/premium_photo-1675147924852-69f8060a9acc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
-            backgroundSize: 'cover'
-          })
+            backgroundSize: 'cover',
+          }),
         }}
       >
         <input
           type="text"
           value={inputValue}
-          onChange={e => setInputValue(e.target.value)}
+          onChange={(e) => setInputValue(e.target.value)}
         />
         <button onClick={() => setOpen(!open)} style={{ margin: '20px' }}>
           Toggle
@@ -363,7 +403,7 @@ function Template(args) {
           onEmojiClick={(emoji, event) => {
             setInputValue(
               // inputValue =>
-              inputValue + (emoji.isCustom ? emoji.unified : emoji.emoji)
+              inputValue + (emoji.isCustom ? emoji.unified : emoji.emoji),
             );
             console.log(emoji, event);
           }}
@@ -378,66 +418,66 @@ const customEmojis = [
     names: ['Alice', 'alice in wonderland'],
     imgUrl:
       'https://cdn.jsdelivr.net/gh/ealush/emoji-picker-react@custom_emojis_assets/alice.png',
-    id: 'alice'
+    id: 'alice',
   },
   {
     names: ['Dog'],
     imgUrl:
       'https://cdn.jsdelivr.net/gh/ealush/emoji-picker-react@custom_emojis_assets/dog.png',
-    id: 'dog'
+    id: 'dog',
   },
   {
     names: ['Hat'],
     imgUrl:
       'https://cdn.jsdelivr.net/gh/ealush/emoji-picker-react@custom_emojis_assets/hat.png',
-    id: 'hat'
+    id: 'hat',
   },
   {
     names: ['Kid'],
     imgUrl:
       'https://cdn.jsdelivr.net/gh/ealush/emoji-picker-react@custom_emojis_assets/kid.png',
-    id: 'kid'
+    id: 'kid',
   },
   {
     names: ['Mic'],
     imgUrl:
       'https://cdn.jsdelivr.net/gh/ealush/emoji-picker-react@custom_emojis_assets/mic.png',
-    id: 'mic'
+    id: 'mic',
   },
   {
     names: ['Moab', 'desert'],
     imgUrl:
       'https://cdn.jsdelivr.net/gh/ealush/emoji-picker-react@custom_emojis_assets/moab.png',
-    id: 'moab'
+    id: 'moab',
   },
   {
     names: ['Potter', 'harry', 'harry potter'],
     imgUrl:
       'https://cdn.jsdelivr.net/gh/ealush/emoji-picker-react@custom_emojis_assets/potter.png',
-    id: 'potter'
+    id: 'potter',
   },
   {
     names: ['Shroom', 'mushroom'],
     imgUrl:
       'https://cdn.jsdelivr.net/gh/ealush/emoji-picker-react@custom_emojis_assets/shroom.png',
-    id: 'shroom'
+    id: 'shroom',
   },
   {
     names: ['Smily'],
     imgUrl:
       'https://cdn.jsdelivr.net/gh/ealush/emoji-picker-react@custom_emojis_assets/smily.png',
-    id: 'smily'
+    id: 'smily',
   },
   {
     names: ['Tabby', 'cat'],
     imgUrl:
       'https://cdn.jsdelivr.net/gh/ealush/emoji-picker-react@custom_emojis_assets/tabby.png',
-    id: 'tabby'
+    id: 'tabby',
   },
   {
     names: ['Vest'],
     imgUrl:
       'https://cdn.jsdelivr.net/gh/ealush/emoji-picker-react@custom_emojis_assets/vest.png',
-    id: 'vest'
-  }
+    id: 'vest',
+  },
 ];

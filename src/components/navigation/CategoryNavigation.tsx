@@ -8,7 +8,6 @@ import { useCategoriesConfig } from '../../config/useConfig';
 import { useActiveCategoryScrollDetection } from '../../hooks/useActiveCategoryScrollDetection';
 import useIsSearchMode from '../../hooks/useIsSearchMode';
 import { useScrollCategoryIntoView } from '../../hooks/useScrollCategoryIntoView';
-import { useShouldHideCustomEmojis } from '../../hooks/useShouldHideCustomEmojis';
 import { isCustomCategory } from '../../typeRefinements/typeRefinements';
 import { useCategoryNavigationRef } from '../context/ElementRefContext';
 
@@ -22,7 +21,6 @@ export function CategoryNavigation() {
 
   const categoriesConfig = useCategoriesConfig();
   const CategoryNavigationRef = useCategoryNavigationRef();
-  const hideCustomCategory = useShouldHideCustomEmojis();
 
   return (
     <div
@@ -32,11 +30,11 @@ export function CategoryNavigation() {
       id="epr-category-nav-id"
       ref={CategoryNavigationRef}
     >
-      {categoriesConfig.map(categoryConfig => {
+      {categoriesConfig.map((categoryConfig) => {
         const category = categoryFromCategoryConfig(categoryConfig);
         const isActiveCategory = category === activeCategory;
 
-        if (isCustomCategory(categoryConfig) && hideCustomCategory) {
+        if (isCustomCategory(categoryConfig)) {
           return null;
         }
 
@@ -64,22 +62,23 @@ const styles = stylesheet.create({
   nav: {
     '.': 'epr-category-nav',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-around',
-    padding: 'var(--epr-header-padding)'
+    padding: 'var(--epr-header-padding)',
+    backgroundColor: 'var(--epr-bg-lowest-color)',
   },
   '.epr-search-active': {
     nav: {
       opacity: '0.3',
       cursor: 'default',
-      pointerEvents: 'none'
-    }
+      pointerEvents: 'none',
+    },
   },
   '.epr-main:has(input:not(:placeholder-shown))': {
     nav: {
       opacity: '0.3',
       cursor: 'default',
-      pointerEvents: 'none'
-    }
-  }
+      pointerEvents: 'none',
+    },
+  },
 });
