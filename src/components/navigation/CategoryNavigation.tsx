@@ -67,6 +67,7 @@ const styles = stylesheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     padding: 'var(--epr-header-padding)',
+    backgroundColor: 'var(--epr-bg-lowest-color)',
   },
   '.epr-search-active': {
     nav: {

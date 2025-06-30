@@ -88,6 +88,7 @@ const DarkTheme = {
   '--epr-category-label-bg-color': 'var(--epr-dark-category-label-bg-color)',
   '--epr-picker-border-color': 'var(--epr-dark-picker-border-color)',
   '--epr-bg-color': 'var(--epr-dark-bg-color)',
+  '--epr-bg-lowest-color': 'var(--epr-dark-bg-lowest-color)',
   '--epr-reactions-bg-color': 'var(--epr-dark-reactions-bg-color)',
   '--epr-search-input-bg-color-active':
     'var(--epr-dark-search-input-bg-color-active)',
@@ -138,6 +139,7 @@ const styles = stylesheet.create({
       '--epr-skin-tone-outer-border-color': '#555555',
       '--epr-skin-tone-inner-border-color': 'var(--epr-bg-color)',
       '--epr-custom-category-icon-bg-color': 'var(--epr-picker-border-color)',
+      '--epr-bg-lowest-color': '#f6f6f6',
 
       '--epr-horizontal-padding': '10px',
 
@@ -214,6 +216,7 @@ const styles = stylesheet.create({
       '--epr-dark-category-label-bg-color': '#222222e6',
       '--epr-dark-picker-border-color': '#151617',
       '--epr-dark-bg-color': '#222222',
+      '--epr-dark-bg-lowest-color': '#1a1a1a',
       '--epr-dark-reactions-bg-color': '#22222290',
       '--epr-dark-search-input-bg-color-active': 'var(--epr-dark)',
       '--epr-dark-emoji-variation-indicator-color': '#444',
