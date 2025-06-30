@@ -8,7 +8,6 @@ import { useCategoriesConfig } from '../../config/useConfig';
 import { useActiveCategoryScrollDetection } from '../../hooks/useActiveCategoryScrollDetection';
 import useIsSearchMode from '../../hooks/useIsSearchMode';
 import { useScrollCategoryIntoView } from '../../hooks/useScrollCategoryIntoView';
-import { useShouldHideCustomEmojis } from '../../hooks/useShouldHideCustomEmojis';
 import { isCustomCategory } from '../../typeRefinements/typeRefinements';
 import { useCategoryNavigationRef } from '../context/ElementRefContext';
 
@@ -22,7 +21,6 @@ export function CategoryNavigation() {
 
   const categoriesConfig = useCategoriesConfig();
   const CategoryNavigationRef = useCategoryNavigationRef();
-  const hideCustomCategory = useShouldHideCustomEmojis();
 
   return (
     <div
@@ -36,7 +34,7 @@ export function CategoryNavigation() {
         const category = categoryFromCategoryConfig(categoryConfig);
         const isActiveCategory = category === activeCategory;
 
-        if (isCustomCategory(categoryConfig) && hideCustomCategory) {
+        if (isCustomCategory(categoryConfig)) {
           return null;
         }
 
