@@ -30,7 +30,6 @@ import { useEmojiVariationPickerState } from '../context/PickerContext';
 import { ClickableEmoji } from '../emoji/Emoji';
 
 import SVGTriangle from './svg/triangle.svg';
-import { CategoryNavigation } from '../navigation/CategoryNavigation';
 
 enum Direction {
   Up,

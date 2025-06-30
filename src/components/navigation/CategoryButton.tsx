@@ -5,11 +5,11 @@ import { ClassNames } from '../../DomUtils/classNames';
 import {
   commonInteractionStyles,
   darkMode,
-  stylesheet
+  stylesheet,
 } from '../../Stylesheet/stylesheet';
 import {
   CategoryConfig,
-  categoryNameFromCategoryConfig
+  categoryNameFromCategoryConfig,
 } from '../../config/categoryConfig';
 import { Button } from '../atoms/Button';
 
@@ -28,7 +28,7 @@ export function CategoryButton({
   category,
   allowNavigation,
   categoryConfig,
-  onClick
+  onClick,
 }: Props) {
   return (
     <Button
@@ -38,9 +38,21 @@ export function CategoryButton({
         commonInteractionStyles.categoryBtn,
         `epr-icn-${category}`,
         {
-          [ClassNames.active]: isActiveCategory
-        }
+          [ClassNames.active]: isActiveCategory,
+        },
       )}
+      style={
+        categoryConfig.imageUrl
+          ? {
+              backgroundImage: `url(${categoryConfig.imageUrl})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              borderRadius: '50%',
+              backgroundColor: 'var(--epr-custom-category-icon-bg-color)',
+            }
+          : {}
+      }
       onClick={onClick}
       aria-label={categoryNameFromCategoryConfig(categoryConfig)}
       aria-selected={isActiveCategory}
@@ -51,24 +63,25 @@ export function CategoryButton({
 }
 
 const DarkActivePositionY = {
-  backgroundPositionY: 'calc(var(--epr-category-navigation-button-size) * 3)'
+  backgroundPositionY: 'calc(var(--epr-category-navigation-button-size) * 3)',
 };
 const DarkPositionY = {
-  backgroundPositionY: 'calc(var(--epr-category-navigation-button-size) * 2)'
+  backgroundPositionY: 'calc(var(--epr-category-navigation-button-size) * 2)',
 };
 
 const DarkInactivePosition = {
   ':not(.epr-search-active)': {
     catBtn: {
       ':hover': DarkActivePositionY,
-      '&.epr-active': DarkActivePositionY
-    }
-  }
+      '&.epr-active': DarkActivePositionY,
+    },
+  },
 };
 
 const styles = stylesheet.create({
   catBtn: {
     '.': 'epr-cat-btn',
+    marginBottom: 'var(--epr-category-gap)',
     display: 'inline-block',
     transition: 'opacity 0.2s ease-in-out',
     position: 'relative',
@@ -86,53 +99,53 @@ const styles = stylesheet.create({
       right: '-2px',
       bottom: '-2px',
       border: '2px solid var(--epr-category-icon-active-color)',
-      borderRadius: '50%'
+      borderRadius: '50%',
     },
     '&.epr-icn-suggested': {
       backgroundPositionX:
-        'calc(var(--epr-category-navigation-button-size) * -8)'
+        'calc(var(--epr-category-navigation-button-size) * -8)',
     },
     '&.epr-icn-custom': {
       backgroundPositionX:
-        'calc(var(--epr-category-navigation-button-size) * -9)'
+        'calc(var(--epr-category-navigation-button-size) * -9)',
     },
     '&.epr-icn-activities': {
       backgroundPositionX:
-        'calc(var(--epr-category-navigation-button-size) * -4)'
+        'calc(var(--epr-category-navigation-button-size) * -4)',
     },
     '&.epr-icn-animals_nature': {
       backgroundPositionX:
-        'calc(var(--epr-category-navigation-button-size) * -1)'
+        'calc(var(--epr-category-navigation-button-size) * -1)',
     },
     '&.epr-icn-flags': {
       backgroundPositionX:
-        'calc(var(--epr-category-navigation-button-size) * -7)'
+        'calc(var(--epr-category-navigation-button-size) * -7)',
     },
     '&.epr-icn-food_drink': {
       backgroundPositionX:
-        'calc(var(--epr-category-navigation-button-size) * -2)'
+        'calc(var(--epr-category-navigation-button-size) * -2)',
     },
     '&.epr-icn-objects': {
       backgroundPositionX:
-        'calc(var(--epr-category-navigation-button-size) * -5)'
+        'calc(var(--epr-category-navigation-button-size) * -5)',
     },
     '&.epr-icn-smileys_people': {
-      backgroundPositionX: '0px'
+      backgroundPositionX: '0px',
     },
     '&.epr-icn-symbols': {
       backgroundPositionX:
-        'calc(var(--epr-category-navigation-button-size) * -6)'
+        'calc(var(--epr-category-navigation-button-size) * -6)',
     },
     '&.epr-icn-travel_places': {
       backgroundPositionX:
-        'calc(var(--epr-category-navigation-button-size) * -3)'
-    }
+        'calc(var(--epr-category-navigation-button-size) * -3)',
+    },
   },
   ...darkMode('catBtn', DarkPositionY),
   '.epr-dark-theme': {
-    ...DarkInactivePosition
+    ...DarkInactivePosition,
   },
   '.epr-auto-theme': {
-    ...DarkInactivePosition
-  }
+    ...DarkInactivePosition,
+  },
 });
