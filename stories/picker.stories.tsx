@@ -36,44 +36,47 @@ export const Native = (args: Props) => (
   <Template {...args} emojiStyle={EmojiStyle.TWITTER} />
 );
 
-const customEmojisWithGuilds = [
-  {
-    names: ['spacebar'],
-    imgUrl: 'https://avatars.githubusercontent.com/u/75180178?s=200&v=4',
-    id: 'spacebar',
-    categoryId: '1382303851090',
-  },
-  {
-    names: ['faze clan'],
-    imgUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/FaZe-Logo-2024-All.png/960px-FaZe-Logo-2024-All.png?20241121035659',
-    id: 'faze_clan',
-    categoryId: '1386575262181',
-  },
-];
+export const DiscordGuildCategories = (args: Props) => {
+  const customEmojisWithGuilds = [
+    {
+      names: ['spacebar'],
+      imgUrl: 'https://avatars.githubusercontent.com/u/75180178?s=200&v=4',
+      id: 'spacebar',
+      categoryId: '1382303851090',
+    },
+    {
+      names: ['faze clan'],
+      imgUrl:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/FaZe-Logo-2024-All.png/960px-FaZe-Logo-2024-All.png?20241121035659',
+      id: 'faze_clan',
+      categoryId: '1386575262181',
+    },
+  ];
 
-export const DiscordGuildCategories = (args: Props) => (
-  <Template
-    {...args}
-    emojiStyle={EmojiStyle.NATIVE}
-    customEmojis={customEmojisWithGuilds}
-    theme={Theme.DARK}
-    categories={[
-      {
-        name: 'Spacebar',
-        imageUrl: 'https://avatars.githubusercontent.com/u/75180178?s=200&v=4',
-        category: 'custom_1382303851090',
-      },
-      {
-        name: 'FaZe',
-        imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/FaZe-Logo-2024-All.png/960px-FaZe-Logo-2024-All.png?20241121035659',
-        category: 'custom_1386575262181',
-      },
-      ...baseCategoriesConfig(),
-    ]}
-  />
-);
+  const categories = [
+    {
+      name: 'Spacebar',
+      imageUrl: 'https://avatars.githubusercontent.com/u/75180178?s=200&v=4',
+      category: 'custom_1382303851090',
+    },
+    {
+      name: 'FaZe',
+      category: 'custom_1386575262181',
+      acronym: 'FaZ',
+    },
+    ...baseCategoriesConfig(),
+  ];
+
+  return (
+    <Template
+      {...args}
+      emojiStyle={EmojiStyle.TWITTER}
+      customEmojis={customEmojisWithGuilds}
+      theme={Theme.DARK}
+      categories={categories}
+    />
+  );
+};
 
 export const Default = (args: Props) => <Template {...args} />;
 export const Dark = (args: Props) => (

@@ -30,6 +30,8 @@ export function CategoryButton({
   categoryConfig,
   onClick,
 }: Props) {
+  const isCustomCategory = categoryConfig.category.startsWith('custom_');
+
   return (
     <Button
       tabIndex={allowNavigation ? 0 : -1}
@@ -42,15 +44,21 @@ export function CategoryButton({
         },
       )}
       style={
-        categoryConfig.imageUrl
-          ? {
-              backgroundImage: `url(${categoryConfig.imageUrl})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              borderRadius: '50%',
-              backgroundColor: 'var(--epr-custom-category-icon-bg-color)',
-            }
+        isCustomCategory
+          ? categoryConfig.imageUrl
+            ? {
+                backgroundImage: `url(${categoryConfig.imageUrl})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                borderRadius: '50%',
+                backgroundColor: 'var(--epr-custom-category-icon-bg-color)',
+              }
+            : {
+                backgroundImage: 'none',
+                backgroundColor: 'var(--epr-custom-category-icon-bg-color)',
+                borderRadius: '50%',
+              }
           : {}
       }
       onClick={onClick}
@@ -58,7 +66,13 @@ export function CategoryButton({
       aria-selected={isActiveCategory}
       role="tab"
       aria-controls="epr-category-nav-id"
-    />
+    >
+      {isCustomCategory && !categoryConfig.imageUrl ? (
+        <div className={cx(styles.acronym)}>
+          {categoryConfig.acronym?.substring(0, 2)}
+        </div>
+      ) : null}
+    </Button>
   );
 }
 
@@ -79,6 +93,17 @@ const DarkInactivePosition = {
 };
 
 const styles = stylesheet.create({
+  acronym: {
+    '.': 'epr-acronym',
+    fontSize: 'var(--epr-category-navigation-acronym-font-size)',
+    fontWeight: 'var(--epr-category-navigation-acronym-font-weight)',
+    textAlign: 'center',
+    color: 'var(--epr-text-color)',
+    height: 'var(--epr-category-navigation-button-size)',
+    display: 'grid',
+    placeItems: 'center',
+    lineHeight: '1em',
+  },
   catBtn: {
     '.': 'epr-cat-btn',
     marginBottom: 'var(--epr-category-gap)',

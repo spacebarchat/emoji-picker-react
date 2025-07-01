@@ -93,6 +93,7 @@ export type CategoryConfig = {
   category: Categories;
   name: string;
   imageUrl?: string;
+  acronym?: string;
 };
 
 export type UserCategoryConfig = Array<Categories | CategoryConfig>;

@@ -167,6 +167,8 @@ const styles = stylesheet.create({
 
       /*  Category Navigation */
       '--epr-category-navigation-button-size': '30px',
+      '--epr-category-navigation-acronym-font-size': '1.0em',
+      '--epr-category-navigation-acronym-font-weight': '500',
 
       /* Variation Picker */
       '--epr-emoji-variation-picker-height': '45px',
